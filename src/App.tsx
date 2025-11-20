@@ -1,13 +1,15 @@
-import { Route, BrowserRouter as Router, Routes} from "react-router-dom"
-import NotFound from "./pages/NotFound"
+import { Route, BrowserRouter as Router, Routes } from "react-router-dom"
+import AppLayout from "./components/layout/AppLayout"
+import AppDashboard from "./components/dashboard/AppDashboard"
 
 
 export default function App() {
   return (
     <Router>
       <Routes>
-        <Route path="/" element={<NotFound/>}/>
-        <Route path="*" element={<NotFound/>}/>
+        <Route path="/" element={<AppLayout />}>
+          <Route index element={<AppDashboard />} />
+        </Route>
       </Routes>
     </Router>
   )
