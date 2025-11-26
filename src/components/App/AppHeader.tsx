@@ -1,5 +1,6 @@
 import { Button } from "../ui/button";
 import { Input } from "../ui/input";
+import { ThemeModeToggle } from "../ui/theme-mode-toggle";
 
 export default function AppHeader() {
     return (
@@ -14,9 +15,12 @@ export default function AppHeader() {
                 className="w-md"
                 placeholder="Search..."
             />
-           <Button>
-            Sign in
-           </Button>
+            <div className="flex items-center gap-3">
+                <ThemeModeToggle />
+                <Button variant="secondary">
+                    Sign in
+                </Button>
+            </div>
         </div>
     )
 }

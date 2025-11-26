@@ -1,26 +1,42 @@
 import { Outlet } from "react-router-dom";
+import type { MouseEvent } from 'react'
 import { ResizableHandle, ResizablePanel, ResizablePanelGroup } from "../ui/resizable";
-import AppHeader from "../AppDashboard/AppHeader";
+import AppHeader from "../App/AppHeader";
 
 export default function AppLayout() {
+
+  function handleContextMenuClick(e: MouseEvent) {
+    console.log(e.pageX)
+  }
+
   return (
-    <div className="text-foreground">
-      {/* side bar for all projects with fildter an create icon*/}
+    <div onContextMenu={handleContextMenuClick} className="flex flex-col h-screen text-foreground">
+
       <AppHeader />
-      <ResizablePanelGroup direction="horizontal" className="flex mt-16">
-        {/* side bar */}
-        <ResizablePanel maxSize={300} className="overflow-hidden">
-          <div className="fixed h-full overflow-hidden">
-            lorem200
+
+      <ResizablePanelGroup
+        direction="horizontal"
+        className="flex-1 mt-14"
+      >
+        {/* Sidebar */}
+        <ResizablePanel maxSize={300} className="overflow-hidden relative">
+          <div className="absolute inset-0 flex flex-col overflow-hidden">
+            <div>Works space</div>
+            <div>Projects</div>
+            <div></div>
           </div>
         </ResizablePanel>
 
         <ResizableHandle />
-        {/* page / dashboard */}
-        <ResizablePanel>
-          <Outlet />
+
+        {/* Main content */}
+        <ResizablePanel className="overflow-hidden relative">
+          <div className="absolute inset-0 overflow-auto">
+            <Outlet />
+          </div>
         </ResizablePanel>
+
       </ResizablePanelGroup>
     </div>
-  )
+  );
 }
